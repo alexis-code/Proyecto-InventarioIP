@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h3>Lista de Ip's Usadas</h3>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre de Activo</th>
+                        <th>Descripción</th>
+                        <th>Categoría</th>
+                        <th>Agencia</th>
+                        <th>Dirección IP</th>
+                        <th>Puerta de Enlace</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in object_list %}
+                    <tr>
+                        <td>{{object.nombre}}</td>
+                        <td>{{object.descripcion}}</td>
+                        <td>{{object.id_categoriaFK.nombre}}</td>
+                        <td>{{object.id_agenciaFK.nombre}}</td>
+                        <td>{{object.id_direccionipFK.direccion}}</td>
+                        <td>{{object.id_gatewayFK.direccion}}</td>
+                        <td>
+                            <a href="/update/{{object.id_activoPK}}" class="">Editar</a>
+                        </td>
+                        <td><a href="#" class="">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Primera</a>|
+                <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">siguiente</a>|
+                <a href="?page={{ page_obj.paginator.num_pages }}">Ultima &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+{% endblock content %}

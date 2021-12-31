@@ -1,0 +1,80 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <br>
+    <div class="card">
+        <h5 class="card-header">Ingresar datos del activo</h5>
+        <div class="card-body">
+            <h5 class="card-title">Crear</h5>
+            <form method="post">{% csrf_token %}
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Nombre del Activo</label>
+                          <input name="nombre" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Descripción del Activo</label>
+                          <input name="descripcion" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Dirección IP</label>
+                            <select name="id_direccionipFK" class="form-control" id="exampleFormControlSelect1">
+                                {%for object in direccionip%}
+                                <option value="{{object.id_direccionPK}}">{{object.direccion}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Puerta de Enlace</label>
+                            <select name="id_gatewayFK" class="form-control" id="exampleFormControlSelect1">
+                                {%for object in gateway%}
+                                <option value="{{object.id_gatewayPK}}">{{object.direccion}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Agencia</label>
+                            <select name="id_agenciaFK" class="form-control" id="exampleFormControlSelect1">
+                                {%for object in agencia%}
+                                <option value="{{object.id_agenciaPK}}">{{object.nombre}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Categoría</label>
+                            <select name="id_categoriaFK" class="form-control" id="exampleFormControlSelect1">
+                                {%for object in categoria%}
+                                <option value="{{object.id_categoriaPK}}">{{object.nombre}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Registrar</button>
+              </form>
+        </div>
+        </div>
+    </div>
+</div>
+<script>
+</script>
+{% endblock content %}

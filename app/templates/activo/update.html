@@ -1,0 +1,78 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <br>
+    <div class="card">
+        <h5 class="card-header">Ingresar datos del activo</h5>
+        <div class="card-body">
+            <h5 class="card-title">Crear</h5>
+            <form method="post">{% csrf_token %}
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                          <label for="nombreactivo">Nombre del Activo</label>
+                          <input name="nombre" type="text" class="form-control" id="nombreactivo" value="{{object.nombre}}"  autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                          <label for="descripactivo">Descripción del Activo</label>
+                          <input name="descripcion" type="text" class="form-control" id="descripactivo" value="{{object.descripcion}}" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="direccionip">Dirección IP</label>
+                            <select name="id_direccionipFK" class="form-control" id="direccionip">
+                                {%for direccion in direccionip%}
+                                <option value= "{{direccion.id_direccionPK}}" {% if direccion.id_direccionPK == object.id_direccionipFK_id %} selected {%endif%}>{{direccion.direccion}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="gateaway">Puerta de Enlace</label>
+                            <select name="id_gatewayFK" class="form-control" id="gateaway">
+                                {%for direccion in gateway%}
+                                <option value="{{direccion.id_gatewayPK}}" {% if direccion.id_gatewayPK == object.id_gatewayFK_id %} selected {%endif%}>{{direccion.direccion}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Agencia</label>
+                            <select name="id_agenciaFK" class="form-control" id="exampleFormControlSelect1">
+                                {%for agen in agencia%}
+                                <option value="{{agen.id_agenciaPK}}" {%if agen.id_agenciaPK == object.id_agenciaFK_id%} selected {%endif%} >{{agen.nombre}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Categoría</label>
+                            <select name="id_categoriaFK" class="form-control" id="exampleFormControlSelect1">
+                                {%for categ in categoria%}
+                                <option value="{{categ.id_categoriaPK}}" {%if categ.id_categoriaPK == object.id_categoriaFK_id%} selected {%endif%}>{{categ.nombre}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Confirmar Cambios</button>
+              </form>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
